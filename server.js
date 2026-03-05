@@ -9,22 +9,15 @@ const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
 
-/* ========================
-   MIDDLEWARE
-======================== */
+//MIDDLEWARE
 
 app.use(cors());
 app.use(express.json());
 
-/* ========================
-   DATABASE CONNECTION
-======================== */
+//DATABASE CONNECTION
 
 connectDB();
 
-/* ========================
-   ROUTES
-======================== */
 
 // Authentication Routes
 app.use("/", authRoutes);
@@ -35,18 +28,10 @@ app.use("/", facultyRoutes);
 // Student Routes
 app.use("/", studentRoutes);
 
-/* ========================
-   TEST ROUTE
-======================== */
 
 app.get("/", (req, res) => {
     res.send("Smart Secure Attendance Server Running ");
 });
-
-/* ========================
-   SERVER START
-======================== */
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
