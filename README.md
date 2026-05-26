@@ -213,31 +213,11 @@ Duplicate Guard     Composite key (sessionId + studentId) checked before insert
 
 ---
 
-## Roadmap
 
-- [x] Role-based authentication
-- [x] Encrypted QR generation
-- [x] GPS geo-fence validation
-- [x] Session expiry enforcement
-- [x] Duplicate attendance prevention
-- [ ] Multi-classroom support
-- [ ] Attendance analytics dashboard
-- [ ] CSV export
-- [ ] AES-256-GCM upgrade
-- [ ] Automated test suite (Jest + Supertest)
-- [ ] HTTPS / production deployment
 
 ---
 
-## Authors
 
-<table>
-  <tr>
-    <td align="center"><b>Vridhi Rajput</b><br>23BDS1050</td>
-    <td align="center"><b>B Sri Soumya</b><br>23BDS1054</td>
-    <td align="center"><b>Smriti Verma</b><br>23BDS1081</td>
-  </tr>
-</table>
 
 **Institution:** VIT Chennai &nbsp;|&nbsp; **Course:** Cryptography and Network Security (BCSE309L)
 
