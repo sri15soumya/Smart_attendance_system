@@ -1,18 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Faculty Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Dashboard — AttendX</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>Faculty Dashboard</h2>
-    <button onclick="startSession()">Start Attendance</button>
-    <br><br>
-    <img id="qrImage" />
-</div>
+  <nav class="navbar">
+    <a href="index.html" class="brand">
+      <span class="dot"></span> AttendX
+    </a>
+    <ul class="nav-links">
+      <li><a href="faculty.html" class="active">Dashboard <span class="nav-badge">Faculty</span></a></li>
+      <li><a href="index.html">Logout</a></li>
+    </ul>
+  </nav>
 
-<script src="js/faculty.js"></script>
+  <div class="page">
+    <div class="page-header">
+      <h1>Faculty Dashboard</h1>
+      <p>Generate a QR code for students to scan and mark attendance.</p>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem;">
+        <div>
+          <p style="font-family:var(--font-head); font-size:16px; font-weight:600;">Session QR Code</p>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:2px;">Click start to generate a new session</p>
+        </div>
+        <span class="chip chip-idle" id="statusChip">Idle</span>
+      </div>
+
+      <div class="qr-box" id="qrBox">
+        <div class="qr-placeholder" id="qrPlaceholder">
+          No session active
+        </div>
+        <img id="qrImage" src="" alt="QR Code" style="display:none;" />
+      </div>
+
+      <button class="btn btn-success" style="margin-top:1.2rem;" id="startBtn" onclick="handleStart()">
+        Start Attendance Session
+      </button>
+    </div>
+  </div>
+
+  <script>
+    async function handleStart() {
+      const btn = document.getElementById('startBtn');
+      btn.textContent = 'Generating...';
+      btn.disabled = true;
+
+      try {
+        await startSession(); // calls your faculty.js function
+
+        // Show QR, hide placeholder
+        const qrImg = document.getElementById('qrImage');
+        if (qrImg.src && qrImg.src !== window.location.href) {
+          qrImg.style.display = 'block';
+          document.getElementById('qrPlaceholder').style.display = 'none';
+
+          // Update chip to Live
+          const chip = document.getElementById('statusChip');
+          chip.className = 'chip chip-live';
+          chip.textContent = 'Live';
+        }
+      } catch (err) {
+        alert('Failed to start session. Is the server running?');
+      }
+
+      btn.textContent = 'Regenerate QR';
+      btn.disabled = false;
+    }
+  </script>
+  <script src="js/faculty.js"></script>
 </body>
 </html>

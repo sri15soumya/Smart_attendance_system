@@ -7,8 +7,8 @@ const { encrypt } = require("../utils/encryption");
 const router = express.Router();
 
 /* Classroom coordinates */
-const CLASS_LAT = 12.84296;
-const CLASS_LON = 80.15804;
+const CLASS_LAT = 12.844398 ;
+const CLASS_LON = 80.153806;
 router.post("/start-session", async (req, res) => {
 
     try {
