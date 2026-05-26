@@ -119,7 +119,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
 /* Allowed radius in meters */
-const ALLOWED_RADIUS = 50;
+const ALLOWED_RADIUS = 500;
 
 
 /* Haversine Distance Function */

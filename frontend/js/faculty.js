@@ -8,7 +8,19 @@ async function startSession() {
         }
     });
 
+    if (!response.ok) {
+        throw new Error("Server error: " + response.status);
+    }
+
     const data = await response.json();
 
-    document.getElementById("qrImage").src = data.qr;
+    const qrImg = document.getElementById("qrImage");
+    qrImg.src = data.qr;
+    qrImg.style.display = "block";
+
+    document.getElementById("qrPlaceholder").style.display = "none";
+
+    const chip = document.getElementById("statusChip");
+    chip.className = "chip chip-live";
+    chip.textContent = "Live";
 }
