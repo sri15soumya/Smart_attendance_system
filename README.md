@@ -218,11 +218,3 @@ Duplicate Guard     Composite key (sessionId + studentId) checked before insert
 ---
 
 
-
-**Institution:** VIT Chennai &nbsp;|&nbsp; **Course:** Cryptography and Network Security (BCSE309L)
-
----
-
-<div align="center">
-<sub>Built with Node.js · MongoDB · AES-256 · GPS Verification</sub>
-</div>
