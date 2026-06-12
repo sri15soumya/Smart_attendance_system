@@ -1,39 +1,62 @@
-require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
+const dotenv = require("dotenv");
 
-const authRoutes = require("./routes/authRoutes");
-const facultyRoutes = require("./routes/facultyRoutes");
-const studentRoutes = require("./routes/studentRoutes");
+dotenv.config();
+
+const connectDB =
+require("./config/db");
+
+const authRoutes =
+require("./routes/authRoutes");
+
+const sessionRoutes =
+require("./routes/sessionRoutes");
+
+const attendanceRoutes =
+require("./routes/attendanceRoutes");
+const {rateLimiter}= require("./middleware/rateLimiter")
+
+const classroomRoutes =
+require(
+"./routes/classroomRoutes"
+);
+
+const subjectRoutes =
+require(
+"./routes/subjectRoutes"
+);
+
+const cors = require("cors");
 
 const app = express();
 
-//MIDDLEWARE
-
-app.use(cors());
-app.use(express.json());
-
-//DATABASE CONNECTION
-
 connectDB();
+app.use(cors());
+
+app.use(express.json());
+app.use(rateLimiter);
+
+app.use("/auth", authRoutes);
+
+app.use("/sessions", sessionRoutes);
+
+app.use("/attendance", attendanceRoutes);
+
+app.use("/classrooms",classroomRoutes);
+
+app.use("/subjects",subjectRoutes);
 
 
-// Authentication Routes
-app.use("/", authRoutes);
-
-// Faculty Routes
-app.use("/", facultyRoutes);
-
-// Student Routes
-app.use("/", studentRoutes);
 
 
-app.get("/", (req, res) => {
-    res.send("Smart Secure Attendance Server Running ");
-});
-const PORT = process.env.PORT || 5000;
+
+const PORT =
+process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+
+    console.log(
+        `Server running on ${PORT}`
+    );
+
 });
